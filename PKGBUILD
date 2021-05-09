@@ -1,6 +1,6 @@
 # Maintainer: Sam Mulvey <archlinux -at- sammulvey.com>
 pkgname=qemu-android-x86
-_pkgver="9.0-r2"
+_pkgver="7.1-r5"
 pkgver=9.0.r2
 pkgrel=2
 pkgdesc="Android-x86 environment via QEMU and VirGL"
@@ -10,15 +10,15 @@ license=('Apache' 'GPL2' 'custom:Creative Commons 3.0 Attribution Unported')
 depends=('rxvt-unicode' 'zenity' 'qemu' 'hicolor-icon-theme')
 makedepends=('inkscape')
 install="qemu-android-x86.install"
-source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.net/frs/redir.php?m=constant&f=android-x86%2F71931%2Fandroid-x86-${_pkgver}.${arch}.rpm"
+source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.mirror.constant.com//android-x86/67834/android-x86-7.1-r5.x86_64.rpm"
 		"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"
 		"qemu-android"
 		"config"
 		"qemu-android.desktop")
-sha256sums=('6e54e25d945e050cf6a6ad2ac3e0775add04b1d586989e29276499c8d11e629f'
+sha256sums=('31efd1a4fa9549a91cacb7bdcb256a057158aa57aec632e41922664cedc7cd39'
             '8c80b881727efc8831c8ef53806e7c1d0427607e145aae09061c4870b6cd402f'
-            'e53911e378a6048d88d4fbaeb870c58f57c44142450527ee99b3c12baa15099a'
-            'e9524cdb27c57e6650af763b2231d67ff3e2beb12f52133e7e95eda4f16b0881'
+            'f70e8e5fecbfacecabcb7fc289ab79ff3e8e88da3ccee9f4b4e8a1d13e23ca0d'
+            '07efe9348ce15d21578a7c1778ca579d79d24f7efc33253fd76f4fdfe80c268e'
             '8a5ed6a6c1a4dfd1c8af0ff5de48965ec2dc6b50f87e5f990d33c7025f63c8ec')
 
 #PKGEXT=".pkg.tar"

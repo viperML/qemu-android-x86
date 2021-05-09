@@ -127,10 +127,11 @@ fi
 do_qemu() {
 
 	if [ -z $BRIDGE ]; then
-		NET_QEMULINE="-netdev user,id=anet0,hostfwd=tcp::$NETPORT-:5000 -device virtio-net-pci,netdev=anet0"
+		NET_QEMULINE="-netdev user,id=anet0,hostfwd=tcp::$NETPORT-:5555 -device virtio-net-pci,netdev=anet0"
 	else
 		NET_QEMULINE="-netdev bridge,br=$BRIDGE,id=anet0 -device virtio-net-pci,netdev=anet0"
 	fi
+	echo $NET_QEMULINE\n
 
 	DO_CMD=""
 

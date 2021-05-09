@@ -11,7 +11,7 @@
 #CPU="core2duo"
 
 # "video=" string to pass to the kernel. Defaults to no string set.
-#VIDEO="1280x720x32"
+VIDEO="1280x720x32"
 
 # Data partition location.
 # If a file is specified it will be a raw image and created if it does not
@@ -22,7 +22,7 @@
 # If set to "none", no data partition will be set.
 # Example:
 #DATA="none" # Save no data
-#DATA="/tmp/data.img" # Create a data file in /tmp. 
+#DATA="/tmp/data.img" # Create a data file in /tmp.
 
 # Data partition size in megabytes.  Only used on creation of a partition image.
 # defaults to 2048.
@@ -39,7 +39,7 @@
 SERIAL="mon:stdio" # console on terminal or in urxvt if gui mode.
 #SERIAL="telnet:127.0.0.1:9000,server,nowait"  # telnet to port 900 for root, might be insecure
 
-# Bridged networking.  
+# Bridged networking.
 #
 # If you use a bridged network for vitual machines, you can set it here.
 # Otherwise it uses user networking.  Make sure to allow the bridge in /etc/qemu/bridge.conf
