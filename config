@@ -1,5 +1,5 @@
-# RAM in megabytes, defaults to 2048.
-#RAM=2048
+# RAM in megabytes, defaults to 4096.
+#RAM=4096
 
 # Number of CPU cores, defaults to 2.
 #CORES=2
@@ -26,8 +26,8 @@ VIDEO="1280x720x32"
 DATA="$HOME/.config/android-x86/data.img"
 
 # Data partition size in megabytes.  Only used on creation of a partition image.
-# defaults to 2048.
-#DATASIZE=2048
+# defaults to 8192.
+#DATASIZE=8192
 
 # System partition location
 # The default install location will be /usr/share/android-x86/system.img, which

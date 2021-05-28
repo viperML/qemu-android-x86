@@ -1,6 +1,7 @@
 #!/bin/bash
 # By Sam Mulvey <archlinux@sammulvey.com>
 # based on script from Chih-Wei Huang <cwhuang@linux.org.tw>
+# Modified By Fernando Ayats <ayatsfer@gmail.com>
 # License: GNU Generic Public License v2
 
 # Sanity checks
@@ -51,7 +52,6 @@ NETPORT=${NETPORT:-47000}
 VGALINE=${VGALINE:-"-vga virtio -display sdl,gl=on"}
 
 # Test for system images:
-# TODO add ability for r/w system image
 SYSTEMIMG=${SYSTEMIMG:-"${HOME}/.config/android-x86/system.img"}
 INITRD=${INITRD:-"/usr/share/android-x86/initrd.img"}
 RAMDISK=${RAMDISK:-"/usr/share/android-x86/ramdisk.img"}

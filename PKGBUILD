@@ -1,4 +1,4 @@
-# Maintainer: Sam Mulvey <archlinux -at- sammulvey.com>
+# Maintainer: Fernando Ayats <ayatsfer[at]gmail[dot]com>
 pkgname=qemu-android-x86
 _pkgver="7.1-r5"
 pkgver=7.1_r5
@@ -17,8 +17,8 @@ source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.mirror.constant.com//a
 		"qemu-android.desktop")
 sha256sums=('31efd1a4fa9549a91cacb7bdcb256a057158aa57aec632e41922664cedc7cd39'
             '8c80b881727efc8831c8ef53806e7c1d0427607e145aae09061c4870b6cd402f'
-            '921d1fe369ec27411a07a47bb7d78e8687d039fd564bd4e376f27eaed3faf580'
-            '56bff6fb805cef14e3c0e27e333214899c0f4ea8336cae0caac49a569afa8b1e'
+            '897fc86e0e91cc6584a135d8d949b7c0880d929b4a0b770d802407787a87908f'
+            'b8dd746aa074ac5c24e5b3dd31cd4bb783ffb0992df66d63229edb20c5522e38'
             '8a5ed6a6c1a4dfd1c8af0ff5de48965ec2dc6b50f87e5f990d33c7025f63c8ec')
 
 #PKGEXT=".pkg.tar"
