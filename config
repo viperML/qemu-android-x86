@@ -23,10 +23,18 @@ VIDEO="1280x720x32"
 # Example:
 #DATA="none" # Save no data
 #DATA="/tmp/data.img" # Create a data file in /tmp.
+DATA="$HOME/.config/android-x86/data.img"
 
 # Data partition size in megabytes.  Only used on creation of a partition image.
 # defaults to 2048.
 #DATASIZE=2048
+
+# System partition location
+# The default install location will be /usr/share/android-x86/system.img, which
+# may not be writable by the user. Also you may want to keep different system partitions
+# as they are modifiable.
+# Path specified here will be the location to copy the default image to.
+SYSTEMIMG="$HOME/.config/android-x86/system.img"
 
 # Note: right now the only thing that's working right now with VirGL on machines tested
 # is SDL with an external serial0.   GTK shows the serial but no video, SDL shows
@@ -50,3 +58,7 @@ SERIAL="mon:stdio" # console on terminal or in urxvt if gui mode.
 # the tested machines, only SDL.
 # Example (default):
 #VGALINE="-vga virtio -display sdl,gl=on"
+
+# Port to expose for ADB connections
+# For example, when using user networking: adb connect localhost:47000
+NETPORT=47000

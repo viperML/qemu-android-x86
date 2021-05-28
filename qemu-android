@@ -41,10 +41,10 @@ fi
 # Set meaningful defaults
 IN_SUDO=0
 IN_TERMINAL=0
-RAM=${RAM:-2048}
+RAM=${RAM:-4096}
 CORES=${CORES:-2}
 DATA=${DATA:-"${HOME}/.config/android-x86/data.img"}
-DATASIZE=${DATASIZE:-2048}
+DATASIZE=${DATASIZE:-8192}
 CPU=${CPU:-"host"}
 NETPORT=${NETPORT:-47000}
 # TODO figure out why GTK doesn't work on all my machines.  Might obviate the need to URXVT for serial console
@@ -52,12 +52,12 @@ VGALINE=${VGALINE:-"-vga virtio -display sdl,gl=on"}
 
 # Test for system images:
 # TODO add ability for r/w system image
-SYSTEMIMG=${SYSTEMIMG:-"/usr/share/android-x86/system.sfs"}
+SYSTEMIMG=${SYSTEMIMG:-"${HOME}/.config/android-x86/system.img"}
 INITRD=${INITRD:-"/usr/share/android-x86/initrd.img"}
 RAMDISK=${RAMDISK:-"/usr/share/android-x86/ramdisk.img"}
 KERNEL=${KERNEL:-"/usr/share/android-x86/kernel"}
 
-if [ ! -e $SYSTEMIMG ] || [ ! -e $INITRD ] || [ ! -e $RAMDISK ] || [ ! -e $KERNEL ]; then
+if [ ! -e $INITRD ] || [ ! -e $RAMDISK ] || [ ! -e $KERNEL ]; then
 	nope "System images aren't installed.  Check your android-x86 package."
 fi
 
@@ -104,6 +104,23 @@ else
 
 fi
 
+if [ ! -e $SYSTEMIMG ]; then
+	if [ ! -w `dirname $SYSTEMIMG` ]; then
+		nope "Location for $SYSTEMIMG doesn't exist or isn't writeable."
+    fi
+
+	if [ $GUI -eq 1 ]; then
+		$URXVT -title "Android-x86 System Partition Copy" -e \
+		bash -c "cp '/usr/share/android-x86/system.img' $SYSTEMIMG"
+	else
+        cp "/usr/share/android-x86/system.img" $SYSTEMIMG
+	fi
+
+elif [ ! -w $SYSTEMIMG]; then
+	nope "System partition $SYSTEMIMG isn't writeable."
+fi
+
+
 
 
 VIDEO_CMDLINE=""
@@ -148,7 +165,7 @@ do_qemu() {
 	-device qemu-xhci,id=xhci0 -device usb-tablet,bus=xhci0.0 -machine vmport=off \
 	-soundhw hda \
 	-boot menu=on \
-	-drive index=0,if=virtio,id=system,file=$SYSTEMIMG,format=raw,readonly \
+	-drive index=0,if=virtio,id=system,file=$SYSTEMIMG,format=raw,\
 	-drive index=1,if=virtio,id=ramdisk,file=$RAMDISK,format=raw,readonly \
 	$NET_QEMULINE $DATA_QEMULINE $SERIAL_QEMULINE $VGALINE
 }

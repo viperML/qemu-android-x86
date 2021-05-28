@@ -1,14 +1,14 @@
 # Maintainer: Sam Mulvey <archlinux -at- sammulvey.com>
 pkgname=qemu-android-x86
 _pkgver="7.1-r5"
-pkgver=9.0.r2
-pkgrel=2
+pkgver=7.1_r5
+pkgrel=1
 pkgdesc="Android-x86 environment via QEMU and VirGL"
 arch=("x86_64")
 url="http://www.android-x86.org/"
 license=('Apache' 'GPL2' 'custom:Creative Commons 3.0 Attribution Unported')
-depends=('rxvt-unicode' 'zenity' 'qemu' 'hicolor-icon-theme')
-makedepends=('inkscape')
+depends=('rxvt-unicode' 'zenity' 'qemu' 'hicolor-icon-theme') 
+makedepends=('inkscape' 'squashfs-tools')
 install="qemu-android-x86.install"
 source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.mirror.constant.com//android-x86/67834/android-x86-7.1-r5.x86_64.rpm"
 		"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"
@@ -17,11 +17,19 @@ source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.mirror.constant.com//a
 		"qemu-android.desktop")
 sha256sums=('31efd1a4fa9549a91cacb7bdcb256a057158aa57aec632e41922664cedc7cd39'
             '8c80b881727efc8831c8ef53806e7c1d0427607e145aae09061c4870b6cd402f'
-            'f70e8e5fecbfacecabcb7fc289ab79ff3e8e88da3ccee9f4b4e8a1d13e23ca0d'
-            '07efe9348ce15d21578a7c1778ca579d79d24f7efc33253fd76f4fdfe80c268e'
+            '921d1fe369ec27411a07a47bb7d78e8687d039fd564bd4e376f27eaed3faf580'
+            '56bff6fb805cef14e3c0e27e333214899c0f4ea8336cae0caac49a569afa8b1e'
             '8a5ed6a6c1a4dfd1c8af0ff5de48965ec2dc6b50f87e5f990d33c7025f63c8ec')
 
 #PKGEXT=".pkg.tar"
+
+build() {
+    cd "android-${_pkgver}"
+    unsquashfs system.sfs
+    mv squashfs-root/system.img .
+    rm -rf squashfs-root
+    rm system.sfs
+}
 
 package() {
 
