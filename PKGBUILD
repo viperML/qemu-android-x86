@@ -1,4 +1,5 @@
 # Maintainer: Fernando Ayats <ayatsfer[at]gmail[dot]com>
+groups=('modified')
 pkgname=qemu-android-x86
 _pkgver="7.1-r5"
 pkgver=7.1_r5
