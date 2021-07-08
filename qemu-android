@@ -30,19 +30,22 @@ nope() {
 	exit 1
 }
 
+SYSCONFIG=/usr/share/android-x86/config
+CONFIGDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/android-x86
+CONFIG="$CONFIGDIR"/config
 
 # Check for config file, source
-if [ -e $HOME/.config/android-x86/config ]; then
-	. $HOME/.config/android-x86/config
+if [ -r "$CONFIG" ]; then
+   . "$CONFIG"
 else
-	nope "Copy /usr/share/android-x86/config to ${HOME}/.config/android-x86 and modify.  It explains things."
+   nope "Copy $SYSCONFIG to $CONFIGDIR and modify. It explains things."
 fi
 
 # Set meaningful defaults
 IN_TERMINAL=0
 RAM=${RAM:-2048}
 CORES=${CORES:-2}
-DATA=${DATA:-"${HOME}/.config/android-x86/data.img"}
+DATA=${DATA:-"$CONFIGDIR/data.img"}
 DATASIZE=${DATASIZE:-2048}
 CPU=${CPU:-"host"}
 NETPORT=${NETPORT:-47000}
@@ -56,9 +59,11 @@ INITRD=${INITRD:-"/usr/share/android-x86/initrd.img"}
 RAMDISK=${RAMDISK:-"/usr/share/android-x86/ramdisk.img"}
 KERNEL=${KERNEL:-"/usr/share/android-x86/kernel"}
 
-if [ ! -e $SYSTEMIMG ] || [ ! -e $INITRD ] || [ ! -e $RAMDISK ] || [ ! -e $KERNEL ]; then
-	nope "System images aren't installed.  Check your android-x86 package."
-fi
+for i in "$SYSTEMIMG" "$INITRD" "$RAMDISK" "$KERNEL"; do
+   if [ ! -e "$i" ]; then
+       nope "System image $i isn't installed.  Check your android-x86 package."
+   fi
+done
 
 #QEMU=qemu-system-${QEMU_ARCH}
 # Archlinux is x86_64 only
