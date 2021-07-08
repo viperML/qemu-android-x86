@@ -45,7 +45,7 @@ IN_TERMINAL=0
 RAM=${RAM:-4096}
 CORES=${CORES:-2}
 DATA=${DATA:-"${HOME}/.config/android-x86/data.img"}
-DATASIZE=${DATASIZE:-8192}
+DATASIZE=${DATASIZE:-16384}
 CPU=${CPU:-"host"}
 NETPORT=${NETPORT:-47000}
 # TODO figure out why GTK doesn't work on all my machines.  Might obviate the need to URXVT for serial console

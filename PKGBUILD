@@ -18,8 +18,8 @@ source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.mirror.constant.com//a
 		"qemu-android.desktop")
 sha256sums=('31efd1a4fa9549a91cacb7bdcb256a057158aa57aec632e41922664cedc7cd39'
             '8c80b881727efc8831c8ef53806e7c1d0427607e145aae09061c4870b6cd402f'
-            '2ac5f992a293012471a0e6f4e9b1192007614c7bef4de4231a63b79e5c76cbed'
-            'b8dd746aa074ac5c24e5b3dd31cd4bb783ffb0992df66d63229edb20c5522e38'
+            'facf856b31133d2eb4632ec068864f5611d676d9563209fc14ea76aa77f1cec1'
+            'eb9911aaa613bb08041e413dfad6481cc0e812caf6051c3e86e426fe76549596'
             '8a5ed6a6c1a4dfd1c8af0ff5de48965ec2dc6b50f87e5f990d33c7025f63c8ec')
 
 #PKGEXT=".pkg.tar"

@@ -16,4 +16,7 @@ Changes include:
   - In Android, Settings > Apps compatibility > Enable native bridge (? reboot)
   - In a android terminal, or via your pc, remount /system as writable `mount -o rw,remount /system`
   - Manually pull houdini `wget http://dl.android-x86.org/houdini/7_y/houdini.sfs -O /system/etc/houdini7_y.sfs`
-  - Run `enable_nativebridge`, no output should come out
+  - Modify...
+    - `vi /system/bin/enable_nativebridge`
+    - Add `v=7_y` after the first `if` statement
+  - Finally run `enable_nativebridge`, no output should come out (don't ask me why that script is so broken...)
