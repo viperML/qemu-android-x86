@@ -39,7 +39,6 @@ else
 fi
 
 # Set meaningful defaults
-IN_SUDO=0
 IN_TERMINAL=0
 RAM=${RAM:-2048}
 CORES=${CORES:-2}
@@ -73,8 +72,7 @@ if [ $DATA == "none" ]; then
 	DATA_CMDLINE=""
 elif [ -d $DATA ]; then
 	echo "9p mode selected."
-	IN_SUDO=1
-	DATA_QEMULINE="-virtfs local,id=data,path=${DATA},security_model=passthrough,mount_tag=data"
+   DATA_QEMULINE="-virtfs local,id=data,path=${DATA},security_model=mapped-xattr,mount_tag=data"
 	DATA_CMDLINE="DATA=9p"
 else
 	# sudo should only be needed for 9p, if KVM is set up right
@@ -135,7 +133,6 @@ do_qemu() {
 	DO_CMD=""
 
 	[ $IN_TERMINAL -eq 1 ] && [ $GUI -eq 1 ] && DO_CMD+="$URXVT -title Android-x86_Console -e "
-	[ $IN_SUDO -eq 1 ] && DO_CMD+="/usr/bin/sudo "
 	DO_CMD+=$QEMU
 
 

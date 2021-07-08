@@ -19,7 +19,7 @@ source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.net/frs/redir.php?m=co
 		"qemu-android.desktop")
 sha256sums=('6e54e25d945e050cf6a6ad2ac3e0775add04b1d586989e29276499c8d11e629f'
             '8c80b881727efc8831c8ef53806e7c1d0427607e145aae09061c4870b6cd402f'
-            'e53911e378a6048d88d4fbaeb870c58f57c44142450527ee99b3c12baa15099a'
+            '9d856c33ed81529b2a07230e8a2e9586d4fa515eea713941259f6ae46274065d'
             'e9524cdb27c57e6650af763b2231d67ff3e2beb12f52133e7e95eda4f16b0881'
             '8a5ed6a6c1a4dfd1c8af0ff5de48965ec2dc6b50f87e5f990d33c7025f63c8ec')
 
