@@ -31,21 +31,23 @@ nope() {
 	exit 1
 }
 
+SYSCONFIG=/usr/share/android-x86/config
+CONFIGDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/android-x86
+CONFIG="$CONFIGDIR"/config
 
 # Check for config file, source
-if [ -e $HOME/.config/android-x86/config ]; then
-	. $HOME/.config/android-x86/config
+if [ -r "$CONFIG" ]; then
+   . "$CONFIG"
 else
-	nope "Copy /usr/share/android-x86/config to ${HOME}/.config/android-x86 and modify.  It explains things."
+   nope "Copy $SYSCONFIG to $CONFIGDIR and modify. It explains things."
 fi
 
 # Set meaningful defaults
-IN_SUDO=0
 IN_TERMINAL=0
 RAM=${RAM:-4096}
 CORES=${CORES:-2}
-DATA=${DATA:-"${HOME}/.config/android-x86/data.img"}
-DATASIZE=${DATASIZE:-16384}
+DATA=${DATA:-"$CONFIGDIR/data.img"}
+DATASIZE=${DATASIZE:-2048}
 CPU=${CPU:-"host"}
 NETPORT=${NETPORT:-47000}
 # TODO figure out why GTK doesn't work on all my machines.  Might obviate the need to URXVT for serial console
@@ -57,9 +59,11 @@ INITRD=${INITRD:-"/usr/share/android-x86/initrd.img"}
 RAMDISK=${RAMDISK:-"/usr/share/android-x86/ramdisk.img"}
 KERNEL=${KERNEL:-"/usr/share/android-x86/kernel"}
 
-if [ ! -e $INITRD ] || [ ! -e $RAMDISK ] || [ ! -e $KERNEL ]; then
-	nope "System images aren't installed.  Check your android-x86 package."
-fi
+for i in "$INITRD" "$RAMDISK" "$KERNEL"; do
+   if [ ! -e "$i" ]; then
+       nope "System image $i isn't installed.  Check your android-x86 package."
+   fi
+done
 
 #QEMU=qemu-system-${QEMU_ARCH}
 # Archlinux is x86_64 only
@@ -73,8 +77,7 @@ if [ $DATA == "none" ]; then
 	DATA_CMDLINE=""
 elif [ -d $DATA ]; then
 	echo "9p mode selected."
-	IN_SUDO=1
-	DATA_QEMULINE="-virtfs local,id=data,path=${DATA},security_model=passthrough,mount_tag=data"
+   DATA_QEMULINE="-virtfs local,id=data,path=${DATA},security_model=mapped-xattr,mount_tag=data"
 	DATA_CMDLINE="DATA=9p"
 else
 	# sudo should only be needed for 9p, if KVM is set up right
@@ -116,7 +119,7 @@ if [ ! -e $SYSTEMIMG ]; then
         cp "/usr/share/android-x86/system.img" $SYSTEMIMG
 	fi
 
-elif [ ! -w $SYSTEMIMG]; then
+elif [ ! -w $SYSTEMIMG ]; then
 	nope "System partition $SYSTEMIMG isn't writeable."
 fi
 
@@ -153,7 +156,6 @@ do_qemu() {
 	DO_CMD=""
 
 	[ $IN_TERMINAL -eq 1 ] && [ $GUI -eq 1 ] && DO_CMD+="$URXVT -title Android-x86_Console -e "
-	[ $IN_SUDO -eq 1 ] && DO_CMD+="/usr/bin/sudo "
 	DO_CMD+=$QEMU
 
 

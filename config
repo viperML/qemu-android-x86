@@ -26,8 +26,8 @@ VIDEO="1280x720x32"
 DATA="$HOME/.config/android-x86/data.img"
 
 # Data partition size in megabytes.  Only used on creation of a partition image.
-# defaults to 16384.
-#DATASIZE=16384
+# defaults to 2048.
+#DATASIZE=2048
 
 # System partition location
 # The default install location will be /usr/share/android-x86/system.img, which
