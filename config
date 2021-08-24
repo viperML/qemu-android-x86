@@ -1,3 +1,7 @@
+# Terminal app to launch the .desktop file into
+TERMINAL="/usr/bin/urxvt"
+
+
 # RAM in megabytes, defaults to 4096.
 #RAM=4096
 
@@ -26,13 +30,14 @@ VIDEO="1280x720x32"
 DATA="$HOME/.config/android-x86/data.img"
 
 # Data partition size in megabytes.  Only used on creation of a partition image.
-# defaults to 2048.
-#DATASIZE=2048
+# defaults to 16384.
+#DATASIZE=16384
 
 # System partition location
-# The default install location will be /usr/share/android-x86/system.img, which
-# may not be writable by the user. Also you may want to keep different system partitions
-# as they are modifiable.
+# The package install the read-write image into /usr/share/android-x86/system.img,
+# which is not writable by the user.
+# So we must copy it into a user's folder to have write permissions.
+# (By default Android mounts the system image as read-only, and it can be remounted as rw)
 # Path specified here will be the location to copy the default image to.
 SYSTEMIMG="$HOME/.config/android-x86/system.img"
 

@@ -18,7 +18,7 @@ if [ -z ${HOME+x} ]; then echo "HOME isn't set!" ; exit 1 ; fi
 # But hey, someone might want to replace them with their terminal of choice or whatever.
 
 
-URXVT="/usr/bin/urxvt"
+TERMINAL="/usr/bin/urxvt"
 ZENITY="/usr/bin/zenity"
 
 
@@ -39,7 +39,9 @@ CONFIG="$CONFIGDIR"/config
 if [ -r "$CONFIG" ]; then
    . "$CONFIG"
 else
-   nope "Copy $SYSCONFIG to $CONFIGDIR and modify. It explains things."
+    mkdir -p $CONFIGDIR
+    cp $SYSCONFIG $CONFIGDIR
+    nope "No config file detected, creating a new one in $CONFIGDIR. Please read it."
 fi
 
 # Set meaningful defaults
@@ -47,14 +49,14 @@ IN_TERMINAL=0
 RAM=${RAM:-4096}
 CORES=${CORES:-2}
 DATA=${DATA:-"$CONFIGDIR/data.img"}
-DATASIZE=${DATASIZE:-2048}
+DATASIZE=${DATASIZE:-16384}
 CPU=${CPU:-"host"}
 NETPORT=${NETPORT:-47000}
 # TODO figure out why GTK doesn't work on all my machines.  Might obviate the need to URXVT for serial console
 VGALINE=${VGALINE:-"-vga virtio -display sdl,gl=on"}
 
 # Test for system images:
-SYSTEMIMG=${SYSTEMIMG:-"${HOME}/.config/android-x86/system.img"}
+SYSTEMIMG=${SYSTEMIMG:-"${CONFIGDIR}/system.img"}
 INITRD=${INITRD:-"/usr/share/android-x86/initrd.img"}
 RAMDISK=${RAMDISK:-"/usr/share/android-x86/ramdisk.img"}
 KERNEL=${KERNEL:-"/usr/share/android-x86/kernel"}
@@ -89,7 +91,7 @@ else
 		fi
 
 		if [ $GUI -eq 1 ]; then
-			$URXVT -title "Android-x86 Data Partition Create" -e \
+			$TERMINAL -title "Android-x86 Data Partition Create" -e \
 				bash -c "/usr/bin/truncate -s ${DATASIZE}M $DATA && \
 					/usr/bin/mkfs.ext4 $DATA && \
 					echo && echo Hit enter to continue. && read"
@@ -113,7 +115,7 @@ if [ ! -e $SYSTEMIMG ]; then
     fi
 
 	if [ $GUI -eq 1 ]; then
-		$URXVT -title "Android-x86 System Partition Copy" -e \
+		$TERMINAL -title "Android-x86 System Partition Copy" -e \
 		bash -c "cp '/usr/share/android-x86/system.img' $SYSTEMIMG"
 	else
         cp "/usr/share/android-x86/system.img" $SYSTEMIMG
@@ -155,7 +157,7 @@ do_qemu() {
 
 	DO_CMD=""
 
-	[ $IN_TERMINAL -eq 1 ] && [ $GUI -eq 1 ] && DO_CMD+="$URXVT -title Android-x86_Console -e "
+	[ $IN_TERMINAL -eq 1 ] && [ $GUI -eq 1 ] && DO_CMD+="$TERMINAL -title Android-x86_Console -e "
 	DO_CMD+=$QEMU
 
 
