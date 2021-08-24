@@ -42,7 +42,7 @@ package() {
     install -Dm0644 "$srcdir/qemu-android.desktop" "$pkgdir/usr/share/applications/qemu-android.desktop"
     install -Dm0755 "$srcdir/qemu-android" "$pkgdir/usr/bin/qemu-android"
 
-    install -Dm0644 "$srcdir/Android_robot.svg" \
+    install -Dm0644 "$srcdir/qemu-android.svg" \
         "$pkgdir/usr/share/icons/hicolor/scalable/apps/qemu-android.svg"
 
 }
