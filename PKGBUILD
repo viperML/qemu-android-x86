@@ -15,7 +15,7 @@ optdepends=(
     'zenity: for GUI support')
 install="qemu-android-x86.install"
 source=("android-x86-${_pkgver}.${arch}.rpm::https://osdn.net/frs/redir.php?m=constant&f=android-x86%2F71931%2Fandroid-x86-${_pkgver}.${arch}.rpm"
-		"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"
+		"qemu-android.svg"
 		"qemu-android"
 		"config"
 		"qemu-android.desktop")
