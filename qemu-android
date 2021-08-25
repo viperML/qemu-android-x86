@@ -41,7 +41,7 @@ if [ -r "$CONFIG" ]; then
 else
     mkdir -p $CONFIGDIR
     cp $SYSCONFIG $CONFIGDIR
-    nope "No config file detected, creating a new one in $CONFIGDIR. Please read it."
+    nope "No config file detected, creating a new one in $CONFIGDIR. Please read and modify it."
 fi
 
 # Set meaningful defaults
