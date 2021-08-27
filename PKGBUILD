@@ -1,9 +1,9 @@
 # Maintainer: Fernando Ayats <ayatsfer[at]gmail[dot]com>
 groups=('modified')
 pkgname=qemu-android-x86
-_pkgver="9.0-r2"
-pkgver=9.0.r2
-pkgrel=4
+_pkgver="7.1-r5"
+pkgver=7.1.r5
+pkgrel=0
 pkgdesc="Android-x86 environment via QEMU and VirGL"
 arch=("x86_64")
 url="http://www.android-x86.org/"
