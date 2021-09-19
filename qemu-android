@@ -53,7 +53,8 @@ DATASIZE=${DATASIZE:-16384}
 CPU=${CPU:-"host"}
 NETPORT=${NETPORT:-47000}
 # TODO figure out why GTK doesn't work on all my machines.  Might obviate the need to URXVT for serial console
-VGALINE=${VGALINE:-"-vga virtio -display sdl,gl=on"}
+VGALINE=${VGALINE:-"-device virtio-vga-gl -display sdl,gl=on"}
+AUDIOLINE=${AUDIOLINE:-"-device intel-hda -device hda-duplex"}
 
 # Test for system images:
 SYSTEMIMG=${SYSTEMIMG:-"${CONFIGDIR}/system.img"}
@@ -167,11 +168,10 @@ do_qemu() {
 	-initrd $INITRD \
 	-m $RAM -smp $CORES -cpu $CPU \
 	-device qemu-xhci,id=xhci0 -device usb-tablet,bus=xhci0.0 -machine vmport=off \
-	-device intel-hda -device hda-duplex \
 	-boot menu=on \
 	-drive index=0,if=virtio,id=system,file=$SYSTEMIMG,format=raw,\
 	-drive index=1,if=virtio,id=ramdisk,file=$RAMDISK,format=raw,readonly=on \
-	$NET_QEMULINE $DATA_QEMULINE $SERIAL_QEMULINE $VGALINE
+	$NET_QEMULINE $DATA_QEMULINE $SERIAL_QEMULINE $VGALINE $AUDIOLINE
 }
 
 while [ $NETPORT -lt 48000 ]; do
