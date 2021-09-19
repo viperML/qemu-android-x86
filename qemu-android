@@ -153,7 +153,7 @@ do_qemu() {
 	else
 		NET_QEMULINE="-netdev bridge,br=$BRIDGE,id=anet0 -device virtio-net-pci,netdev=anet0"
 	fi
-	echo $NET_QEMULINE\n
+	#echo $NET_QEMULINE\n
 
 	DO_CMD=""
 
@@ -167,10 +167,10 @@ do_qemu() {
 	-initrd $INITRD \
 	-m $RAM -smp $CORES -cpu $CPU \
 	-device qemu-xhci,id=xhci0 -device usb-tablet,bus=xhci0.0 -machine vmport=off \
-	-soundhw hda \
+	-device intel-hda -device hda-duplex \
 	-boot menu=on \
 	-drive index=0,if=virtio,id=system,file=$SYSTEMIMG,format=raw,\
-	-drive index=1,if=virtio,id=ramdisk,file=$RAMDISK,format=raw,readonly \
+	-drive index=1,if=virtio,id=ramdisk,file=$RAMDISK,format=raw,readonly=on \
 	$NET_QEMULINE $DATA_QEMULINE $SERIAL_QEMULINE $VGALINE
 }
 
