@@ -1,5 +1,5 @@
-# Terminal app to launch the .desktop file into
-TERMINAL="/usr/bin/urxvt"
+# Terminal app to launch from the .desktop file
+# TERMINAL="/usr/bin/urxvt"
 
 # RAM in megabytes, defaults to 4096.
 #RAM=4096

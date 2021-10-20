@@ -17,8 +17,6 @@ if [ -z ${HOME+x} ]; then echo "HOME isn't set!" ; exit 1 ; fi
 # Package depends on these, so I won't test for them (for now.)
 # But hey, someone might want to replace them with their terminal of choice or whatever.
 
-
-TERMINAL="/usr/bin/urxvt"
 ZENITY="/usr/bin/zenity"
 
 
@@ -30,6 +28,7 @@ nope() {
 	fi
 	exit 1
 }
+
 
 SYSCONFIG=/usr/share/android-x86/config
 CONFIGDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/android-x86
@@ -44,6 +43,12 @@ else
     nope "No config file detected, creating a new one in $CONFIGDIR. Please read and modify it."
 fi
 
+if [ -z "${TERMINAL+x}" ]; then
+    if [ $GUI -eq 1 ]; then
+        nope "Launching as gui, but no TERMINAL defined at config. Exiting..."
+    fi
+fi
+
 # Set meaningful defaults
 IN_TERMINAL=0
 RAM=${RAM:-4096}
@@ -52,8 +57,18 @@ DATA=${DATA:-"$CONFIGDIR/data.img"}
 DATASIZE=${DATASIZE:-16384}
 CPU=${CPU:-"host"}
 NETPORT=${NETPORT:-47000}
-VGALINE=${VGALINE:-"-device virtio-vga-gl -display sdl,gl=on"}
 AUDIOLINE=${AUDIOLINE:-"-device intel-hda -device hda-duplex"}
+
+# FIX: Different parameters starting from qemu >=6.1
+QEMU_VERSION="$(qemu-x86_64 --version | grep -o -e '6\..*' | cut -c1-3)"
+echo "Running on QEMU ${QEMU_VERSION}"
+if [[ "${QEMU_VERSION}" == "6.0" ]]; then
+    VGALINE=${VGALINE:-"-vga virtio -display sdl,gl=on"}
+else
+    VGALINE=${VGALINE:-"-device virtio-vga-gl -display sdl,gl=on"}
+fi
+echo "Setting VGALINE to ${VGALINE}"
+
 
 # Test for system images:
 SYSTEMIMG=${SYSTEMIMG:-"${CONFIGDIR}/system.img"}
@@ -66,13 +81,6 @@ for i in "$INITRD" "$RAMDISK" "$KERNEL"; do
        nope "System image $i isn't installed.  Check your android-x86 package."
    fi
 done
-
-#QEMU=qemu-system-${QEMU_ARCH}
-# Archlinux is x86_64 only
-QEMU="/usr/bin/qemu-system-x86_64"
-if [ ! -x $QEMU ]; then
-	nope "Please install the 'qemu' package to run Android-x86."
-fi
 
 if [ $DATA == "none" ]; then
 	DATA_QEMULINE=""
@@ -158,7 +166,7 @@ do_qemu() {
 	DO_CMD=""
 
 	[ $IN_TERMINAL -eq 1 ] && [ $GUI -eq 1 ] && DO_CMD+="$TERMINAL -title Android-x86_Console -e "
-	DO_CMD+=$QEMU
+	DO_CMD+=qemu-system-x86_64
 
 
 	exec $DO_CMD -enable-kvm \
