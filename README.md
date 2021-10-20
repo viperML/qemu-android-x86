@@ -3,34 +3,34 @@
 This is a modified version from [https://aur.archlinux.org/packages/qemu-android-x86/](https://aur.archlinux.org/packages/qemu-android-x86/)
 
 Changes include:
-- Downgraded Android x86 to 7.1-r5, which includes houdini support (ARM translation layer)
+- Offer different Android Versions, which includes houdini support (ARM translation layer)
 - Set up ADB connection, configurable via NETPORT config. Default is port 47000 with user networking, so the command to connect would be `$ adb connect localhost:47000`
 - Read + Write system image. This is done by unsquashing the original image.
 
 ## Installation
 
 ### Arch Linux
-- Clone this repo
+- Download the latest revision for your selected Android Version from the releases page
 
-   `$ git clone https://github.com/viperML/qemu-android-x86`
-
-
-- Build and install the package
+- Unpack the tarball, and install it as any other package
 
    `$ makepkg -sric`
 
 
 ### Gentoo Linux
-- Copy the provided ebuild to a local overlay and emerge it.
+
+Ebuilds available in my [overlay](https://github.com/viperML/viperML-overlay/).
 
 
 ## Usage
 
 Either:
   - Run `$ qemu-android` from your terminal
-  - Use the provided .desktop file. You may need to configure the terminal emulator to use in the config file.
+  - Run qemu-android from your start menu / app launcher. You need to configure the
+    TERMINAL variable if using this method.
 
 (Optional) To enable support for ARM apps:
+    <!-- TODO: per version guide -->
   - In Android, Settings > Apps compatibility > Enable native bridge > Reboot
   - Use the provided shell (or via a terminal emulator app):
     - Remount /system as writable `# mount -o rw,remount /system`
