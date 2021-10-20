@@ -61,7 +61,8 @@ SERIAL="mon:stdio" # console on terminal or in urxvt if gui mode.
 # VirGL, which is a feature as of 8.1-r1.  For some reason GTK isn't working on all
 # the tested machines, only SDL.
 # Example (default):
-#VGALINE="-vga virtio -display sdl,gl=on"
+#VGALINE="-device virtio-vga-gl -display sdl,gl=on"
+#AUDIOLINE="-device intel-hda -device hda-duplex"
 
 # Port to expose for ADB connections
 # For example, when using user networking: adb connect localhost:47000
