@@ -12,6 +12,7 @@ Changes include:
 ## Installation
 
 First, create the `qemu-android` group in your system:
+
 ```
 $ sudo groupadd qemu-android
 $ sudo usermod -a -G qemu-android $USER
@@ -34,8 +35,24 @@ $ sudo make install
 Open a terminal and run:
 
 ```
-qemu-android
+$ qemu-android
 ```
+
+- When setting up the device, select `VirtWifi`
+
+- To enable ARM support, run in the same terminal:
+-
+  ```
+  # enable_nativebridge
+  ```
+
+  And enable native bridge under Settings > Apps compatibility
+
+- To connect via adb, run:
+
+  ```sh
+  $ adb connect localhost:<NETPORT> # as set in your config file
+  ```
 
 ## Dependencies
 
