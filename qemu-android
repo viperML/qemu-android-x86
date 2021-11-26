@@ -71,10 +71,11 @@ echo "Setting VGALINE to ${VGALINE}"
 
 
 # Test for system images:
-SYSTEMIMG=${SYSTEMIMG:-"${CONFIGDIR}/system.img"}
-INITRD=${INITRD:-"/usr/share/android-x86/initrd.img"}
-RAMDISK=${RAMDISK:-"/usr/share/android-x86/ramdisk.img"}
-KERNEL=${KERNEL:-"/usr/share/android-x86/kernel"}
+IMGDIR="/var/lib/qemu-android-x86"
+SYSTEMIMG=${SYSTEMIMG:-"$IMGDIR/system.img"}
+INITRD=${INITRD:-"$IMGDIR/initrd.img"}
+RAMDISK=${RAMDISK:-"$IMGDIR/ramdisk.img"}
+KERNEL=${KERNEL:-"$IMGDIR/kernel"}
 
 for i in "$INITRD" "$RAMDISK" "$KERNEL"; do
    if [ ! -e "$i" ]; then

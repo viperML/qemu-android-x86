@@ -4,3 +4,9 @@ src/*
 Android_robot.svg
 *pkg.tar.xz
 *pkg.tar.zst
+*.rpm
+*.img
+*.sfs
+*.tar*
+kernel
+bin
