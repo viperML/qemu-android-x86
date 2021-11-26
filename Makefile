@@ -19,3 +19,4 @@ clean:
 install:
 	install -Dm0664 -o root -g qemu-android $(images) $(TARGET)
 	install -Dm0755 qemu-android /usr/bin/qemu-android
+	install -Dm0644 config /usr/share/qemu-android-x86/config

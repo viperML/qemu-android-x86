@@ -1,11 +1,22 @@
-# Terminal app to launch from the .desktop file
-# TERMINAL="/usr/bin/urxvt"
-
 # RAM in megabytes, defaults to 4096.
 #RAM=4096
 
 # Number of CPU cores, defaults to 2.
 #CORES=2
+
+# "video=" string to pass to the kernel. Defaults to no string set.
+VIDEO="1280x720x32"
+
+# Data partition size in megabytes.  Only used on creation of a partition image, defaults to 16384
+#DATASIZE=16384
+
+# Port to expose for ADB connections, defaults to 47000
+# For example, when using user networking: adb connect localhost:47000
+#NETPORT=47000
+
+
+### Advanced configuration (and untested)
+### To fine tune the QEMU command line, modify the script source code
 
 # CPU definition, defaults to "host"
 # Default Example:
@@ -13,12 +24,9 @@
 # Test with old CPU:
 #CPU="core2duo"
 
-# "video=" string to pass to the kernel. Defaults to no string set.
-VIDEO="1280x720x32"
-
 # Data partition location.
 # If a file is specified it will be a raw image and created if it does not
-# exist.  By default, it will create a file at $HOME/.config/android-x86/data.img
+# exist.  By default, it will create a file at $HOME/.config/qemu-android-x86/data.img
 # as a sparse file with an EXT4 filesystem.
 # If a directory is specified, it'll be mounted as a 9p share.  QEMU must run under
 # sudo and will pop a terminal if run graphically.
@@ -26,23 +34,7 @@ VIDEO="1280x720x32"
 # Example:
 #DATA="none" # Save no data
 #DATA="/tmp/data.img" # Create a data file in /tmp.
-DATA="$HOME/.config/android-x86/data.img"
-
-# Data partition size in megabytes.  Only used on creation of a partition image.
-# defaults to 16384.
-#DATASIZE=16384
-
-# System partition location
-# The package install the read-write image into /usr/share/android-x86/system.img,
-# which is not writable by the user.
-# So we must copy it into a user's folder to have write permissions.
-# (By default Android mounts the system image as read-only, and it can be remounted as rw)
-# Path specified here will be the location to copy the default image to.
-SYSTEMIMG="$HOME/.config/android-x86/system.img"
-
-# Note: right now the only thing that's working right now with VirGL on machines tested
-# is SDL with an external serial0.   GTK shows the serial but no video, SDL shows
-# the windows all overlayed with each other.
+DATA="$HOME/.config/qemu-android-x86/data.img"
 
 # Serial output.  Currently a rootshell.  Defaults to no serial.
 #
@@ -61,9 +53,6 @@ SERIAL="mon:stdio" # console on terminal or in urxvt if gui mode.
 # VirGL, which is a feature as of 8.1-r1.  For some reason GTK isn't working on all
 # the tested machines, only SDL.
 # Example (default):
-#VGALINE="-device virtio-vga-gl -display sdl,gl=on"
+#VGALINE="-device virtio-vga-gl -display sdl,gl=on" # qemu >= 6.1
+#VGALINE="-vga virtio -display sdl,gl=on" # qemu < 6.1
 #AUDIOLINE="-device intel-hda -device hda-duplex"
-
-# Port to expose for ADB connections
-# For example, when using user networking: adb connect localhost:47000
-NETPORT=47000
