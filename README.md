@@ -13,7 +13,7 @@ Changes include:
 
 First, create the `qemu-android` group in your system:
 
-```
+```sh
 $ sudo groupadd qemu-android
 $ sudo usermod -a -G qemu-android $USER
 # Reboot your system
@@ -23,7 +23,7 @@ Download any `android-x86-<version>.x86_64.rpm` from upstream: [https://osdn.net
 
 Finally, install the package:
 
-```
+```sh
 $ make
 $ sudo make install
 ```
@@ -46,7 +46,7 @@ $ qemu-android
   # enable_nativebridge
   ```
 
-  And enable native bridge under Settings > Apps compatibility
+  Then enable native bridge under Settings > Apps compatibility and reboot the VM.
 
 - To connect via adb, run:
 
