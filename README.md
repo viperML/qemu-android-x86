@@ -19,7 +19,7 @@ $ sudo usermod -a -G qemu-android-x86 $USER
 # Reboot your system
 ```
 
-Download any `android-x86-<version>.x86_64.rpm` from upstream: [https://osdn.net/projects/android-x86/releases](https://osdn.net/projects/android-x86/releases) and place it in this directory with the name `android.rpm`. Alternatively, you can specify the variable `SOURCE_RPM` to `make`.
+Download any `android-x86-<version>.x86_64.rpm` from upstream: [https://osdn.net/projects/android-x86/releases](https://osdn.net/projects/android-x86/releases) and place it in this directory with the name `android.rpm`. Alternatively, you can specify the absolute path to your rpm with the `SOURCE_RPM` make variable.
 
 Finally, install the package:
 
