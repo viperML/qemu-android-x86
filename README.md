@@ -28,6 +28,9 @@ $ make
 $ sudo make install
 ```
 
+Tested to work with:
+
+- 7.1-r6
 
 
 ## Usage
