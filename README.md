@@ -35,11 +35,8 @@ Tested to work with:
 
 ## Usage
 
-Open a terminal and run:
+Open your application launcher and find `qemu-android-x86`, or run `qemu-android-x86` from the command line.
 
-```
-$ qemu-android-x86
-```
 
 - When setting up the device, select `VirtWifi`
 
