@@ -18,6 +18,7 @@ clean:
 	rm -rf bin squashfs-root system.sfs android.tar $(images)
 
 install:
+	install -dm755 $(IMAGES_TARGET)
 	install -Dm0664 -o root -g qemu-android-x86 $(images) $(IMAGES_TARGET)
 	install -Dm0755 qemu-android-x86 /usr/bin/qemu-android-x86
 	install -Dm0644 config /usr/share/qemu-android-x86/config
