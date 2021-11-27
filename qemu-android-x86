@@ -93,7 +93,7 @@ else
 fi
 
 if [ ! -w $SYSTEMIMG ]; then
-	nope "System partition $SYSTEMIMG isn't writeable. Did you reboot after adding youself to the qemu-android group?"
+	nope "System partition $SYSTEMIMG isn't writeable. Did you reboot after adding youself to the qemu-android-x86 group?"
 fi
 
 

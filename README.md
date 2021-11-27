@@ -11,15 +11,15 @@ Changes include:
 
 ## Installation
 
-First, create the `qemu-android` group in your system:
+First, create the `qemu-android-x86` group in your system:
 
 ```sh
-$ sudo groupadd qemu-android
-$ sudo usermod -a -G qemu-android $USER
+$ sudo groupadd qemu-android-x86
+$ sudo usermod -a -G qemu-android-x86 $USER
 # Reboot your system
 ```
 
-Download any `android-x86-<version>.x86_64.rpm` from upstream: [https://osdn.net/projects/android-x86/releases](https://osdn.net/projects/android-x86/releases) and place it in this directory with the name `android.rpm`.
+Download any `android-x86-<version>.x86_64.rpm` from upstream: [https://osdn.net/projects/android-x86/releases](https://osdn.net/projects/android-x86/releases) and place it in this directory with the name `android.rpm`. Alternatively, you can specify the variable `SOURCE_RPM` to `make`.
 
 Finally, install the package:
 
@@ -35,13 +35,13 @@ $ sudo make install
 Open a terminal and run:
 
 ```
-$ qemu-android
+$ qemu-android-x86
 ```
 
 - When setting up the device, select `VirtWifi`
 
 - To enable ARM support, run in the same terminal:
--
+
   ```
   # enable_nativebridge
   ```
@@ -57,14 +57,9 @@ $ qemu-android
 ## Dependencies
 
 - Runtime dependencies:
+  - qemu (witch virgl support)
   - bash
-  - qemu
 
 - Build dependencies:
   - squashfs-tools
   - rpm2targz
-
-## Uninstall
-
-Remove `/var/lib/qemu-android-x86`, `/usr/bin/qemu-android`, `/usr/share/qemu-android-x86`,
-`$HOME/.config/qemu-android-x86`, and remove the `qemu-android` group.
