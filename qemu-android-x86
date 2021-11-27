@@ -14,6 +14,7 @@ if [ -z ${HOME+x} ]; then echo "HOME isn't set!" ; exit 1 ; fi
 
 nope() {
 	echo "$1"
+	read -p "Press any key to exit"
 	exit 1
 }
 
