@@ -36,4 +36,10 @@ stdenv.mkDerivation rec {
     "DESTDIR=${placeholder "out"}"
     "PREFIX="
   ];
+
+  meta = {
+    description = "Android-x86 environment via QEMU and VirGL";
+    license = lib.licenses.gpl2;
+    platforms = lib.platforms.linux;
+  };
 }
