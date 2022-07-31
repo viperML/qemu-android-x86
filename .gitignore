@@ -13,3 +13,4 @@ bin
 out
 .direnv
 result
+qemu-android-x86

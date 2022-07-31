@@ -1,22 +1,35 @@
-# RAM in megabytes, defaults to 4096.
-#RAM=4096
+### qemu-android-x86 configuration
+### This is a bash script that will be sourced at runtime
+### Defaults values are set here
 
-# Number of CPU cores, defaults to 2.
-#CORES=2
+# RAM in megabytes
+RAM="4096"
+
+# Number of CPU cores
+CORES="2"
 
 # "video=" string to pass to the kernel. Defaults to no string set.
 VIDEO="1280x720x32"
 
 # Data partition size in megabytes.  Only used on creation of a partition image, defaults to 16384
-#DATASIZE=16384
+DATASIZE="16384"
 
 # Port to expose for ADB connections, defaults to 47000
 # For example, when using user networking: adb connect localhost:47000
-#NETPORT=47000
+NETPORT="47000"
+
+# Data partition location.
+# DATADIR specifies the root directory where to store the runtime data.
+# DATAMODE specifies how this data is stored.
+# - img : Default, store a data.img (best performance)
+# - 9p : Store all files in a 9p share
+# - none : Don't store any data
+DATADIR="$XDG_DATA_HOME/qemu-android-x86"
+DATAMODE="img"
 
 
-### Advanced configuration (and untested)
-### To fine tune the QEMU command line, modify the script source code
+### Advanced configuration, not properly tested
+### To fine tune the QEMU command line, patch the sources
 
 # CPU definition, defaults to "host"
 # Default Example:
@@ -24,17 +37,6 @@ VIDEO="1280x720x32"
 # Test with old CPU:
 #CPU="core2duo"
 
-# Data partition location.
-# If a file is specified it will be a raw image and created if it does not
-# exist.  By default, it will create a file at $HOME/.config/qemu-android-x86/data.img
-# as a sparse file with an EXT4 filesystem.
-# If a directory is specified, it'll be mounted as a 9p share.  QEMU must run under
-# sudo and will pop a terminal if run graphically.
-# If set to "none", no data partition will be set.
-# Example:
-#DATA="none" # Save no data
-#DATA="/tmp/data.img" # Create a data file in /tmp.
-DATA="$HOME/.config/qemu-android-x86/data.img"
 
 # Serial output.  Currently a rootshell.  Defaults to no serial.
 #
@@ -53,8 +55,7 @@ SERIAL="mon:stdio" # console on terminal or in urxvt if gui mode.
 # VirGL, which is a feature as of 8.1-r1.  For some reason GTK isn't working on all
 # the tested machines, only SDL.
 # Example (default):
-#VGALINE="-device virtio-vga-gl -display sdl,gl=on" # qemu >= 6.1
-#VGALINE="-vga virtio -display sdl,gl=on" # qemu < 6.1
-#AUDIOLINE="-device intel-hda -device hda-duplex"
+#VGA_QEMULINE="-device virtio-vga-gl -display sdl,gl=on" # qemu >= 6.1
+#AUDIO_QEMULINE="-device intel-hda -device hda-duplex"
 
 # vim: set syntax:bash
