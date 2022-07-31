@@ -21,6 +21,7 @@ clean:
 qemu-android-x86: qemu-android-x86.in
 	m4 ${M4FLAGS} qemu-android-x86.in > qemu-android-x86
 	chmod 755 qemu-android-x86
+	shellcheck qemu-android-x86
 
 install: all
 	@install -dm755 $(DESTDIR)$(PREFIX)/share/qemu-android-x86

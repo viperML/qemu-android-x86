@@ -21,8 +21,8 @@ NETPORT="47000"
 # Data partition location.
 # DATADIR specifies the root directory where to store the runtime data.
 # DATAMODE specifies how this data is stored.
-# - img : Default, store a data.img (best performance)
-# - 9p : Store all files in a 9p share
+# - img  : Default, store a data.img (best performance)
+# - 9p   : Store all files in a 9p share
 # - none : Don't store any data
 DATADIR="$XDG_DATA_HOME/qemu-android-x86"
 DATAMODE="img"
@@ -36,7 +36,6 @@ DATAMODE="img"
 #CPU="host"
 # Test with old CPU:
 #CPU="core2duo"
-
 
 # Serial output.  Currently a rootshell.  Defaults to no serial.
 #
@@ -55,7 +54,7 @@ SERIAL="mon:stdio" # console on terminal or in urxvt if gui mode.
 # VirGL, which is a feature as of 8.1-r1.  For some reason GTK isn't working on all
 # the tested machines, only SDL.
 # Example (default):
-#VGA_QEMULINE="-device virtio-vga-gl -display sdl,gl=on" # qemu >= 6.1
-#AUDIO_QEMULINE="-device intel-hda -device hda-duplex"
+VGA_QEMULINE="-device virtio-vga-gl -display sdl,gl=on"
+AUDIO_QEMULINE="-device intel-hda -device hda-duplex"
 
 # vim: set syntax:bash

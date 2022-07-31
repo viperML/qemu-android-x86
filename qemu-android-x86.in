@@ -66,9 +66,6 @@ done
 
 mkdir -p "$DATADIR"
 
-# TODO implement other modes and check for existing data
-echo "$DATAMODE" > "$DATADIR/DATAMODE"
-
 if [ "$DATAMODE" == "img" ]; then
 	DATAIMG="$DATADIR/data.img"
 
@@ -77,9 +74,19 @@ if [ "$DATAMODE" == "img" ]; then
 		mkfs.ext4 "$DATAIMG"
 	fi
 
-
 	DATA_QEMULINE="-drive index=2,if=virtio,id=data,file=$DATAIMG,format=raw"
 	DATA_CMDLINE="DATA=vdc"
+elif [ "$DATAMODE" == "9p" ]; then
+	DATAROOT="$DATADIR/9p-root"
+
+	mkdir -p "$DATAROOT"
+	DATA_QEMULINE="-virtfs local,id=data,path=$DATAROOT,security_model=mapped-xattr,mount_tag=data"
+	DATA_CMDLINE="DATA=9p"
+elif [ "$DATAMODE" == "none" ]; then
+	DATA_QEMULINE=""
+	DATA_CMDLINE=""
+else
+	nope "\$DATAMODE=$DATAMODE is not recognized"
 fi
 
 
@@ -102,6 +109,7 @@ do_qemu() {
 		NET_QEMULINE="-netdev bridge,br=$BRIDGE,id=anet0 -device virtio-net-pci,netdev=anet0"
 	fi
 
+	# shellcheck disable=SC2086
 	exec qemu-system-x86_64 \
 		-enable-kvm \
 		-kernel "$KERNEL" \
