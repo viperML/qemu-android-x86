@@ -56,3 +56,5 @@ SERIAL="mon:stdio" # console on terminal or in urxvt if gui mode.
 #VGALINE="-device virtio-vga-gl -display sdl,gl=on" # qemu >= 6.1
 #VGALINE="-vga virtio -display sdl,gl=on" # qemu < 6.1
 #AUDIOLINE="-device intel-hda -device hda-duplex"
+
+# vim: set syntax:bash

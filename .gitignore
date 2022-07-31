@@ -10,3 +10,6 @@ Android_robot.svg
 *.tar*
 kernel
 bin
+out
+.direnv
+result
